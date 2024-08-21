@@ -3,13 +3,15 @@ addons/
 doc/
 debian/
 odoo/
-MANIFEST.in/
+MANIFEST.in
 SECURITY.md
 odoo-bin
 requirements.txt/
 setup.py
 setup.cfg
-
+Makefile
+post/
+web_responsive.zip/
 # dotfiles
 .*
 !.gitignore
