@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- couse actions -->
+        <record id="menu_learning_center_others_action_search" model="ir.ui.view">
+            <field name="name">course.tree</field>
+            <field name="model">learning.center.course</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" />
+                    <field name="description" />
+                    <field name="group_ids"></field>
+                    <field name="price"></field>
+                </search>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="menu_learning_center_others_action_course">
+            <field name="name">Cources</field>
+            <field name="res_model">learning.center.course</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="menu_learning_center_others_action_search" />
+        </record>
+        <!-- couse actions -->
+
+     
+        <!-- group action -->
+        <record id="menu_learning_center_others_action_search_group" model="ir.ui.view">
+            <field name="name">learning.center.group.search</field>
+            <field name="model">learning.center.group</field>
+            <field name="arch" type="xml">
+                <search>
+
+                    <field name="name" />
+                    <field name="course_id" />
+                    <field name="student_ids" />
+                    <field name="teacher_id" />
+                    <field name="days_ids"/> 
+                    <field name="start_date" />
+                    <field name="end_date" />
+                    <field name="custom_price" />
+
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="menu_learning_center_others_action_groups">
+            <field name="name">Grouplar</field>
+            <field name="res_model">learning.center.group</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="menu_learning_center_others_action_search_group" />
+        </record>
+        <!-- group action -->
+
+        <menuitem
+            id="menu_learning_center_others_course"
+            name="Cources"
+            action="menu_learning_center_others_action_course"
+            parent="menu_learning_center_others"
+        />
+        <menuitem
+            id="menu_learning_center_others_groups"
+            name="Groups"
+            action="menu_learning_center_others_action_groups"
+            parent="menu_learning_center_others"
+        />
+
+    </data>
+</odoo>

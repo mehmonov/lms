@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+    <record model="ir.actions.act_window" id="action_teacher">
+        <field name="name">Teachers</field>
+        <field name="res_model">learning.center.teacher</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_payment_tree" model="ir.ui.view">
+        <field name="name">teacher.tree</field>
+        <field name="model">learning.center.teacher</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="phone"></field>
+                <field name="email"></field>
+                <field name="groups_ids"></field>
+            </tree>
+        </field>
+    </record>
+    
+     <menuitem
+            id="menu_learning_center_teachers"
+            name="Teachers"
+            action="action_teacher"
+            parent="menu_learning_center_root"
+        />
+  
+
+
+    </data>
+</odoo>

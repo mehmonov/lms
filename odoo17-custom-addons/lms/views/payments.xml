@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Search View for Payments -->
+    <record id="view_learning_center_payment_filter" model="ir.ui.view">
+        <field name="name">payment.search</field>
+        <field name="model">learning.center.payment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="student_id"/>
+                <field name="date"/>
+                <field name="status"/>
+
+                <!-- Status filters -->
+                <filter string="Paid" name="paid" domain="[('status','=','paid')]"/>
+                <filter string="Pending" name="pending" domain="[('status','=','pending')]"/>
+                
+                <!-- Date filters -->
+                <filter string="This Month" name="this_month" domain="[('date','&gt;=',context_today().replace(day=1)), ('date','&lt;=',context_today())]"/>
+                <filter string="Last Month" name="last_month" domain="[('date','&gt;=',(context_today().replace(day=1) - relativedelta(months=1)).replace(day=1)), ('date','&lt;',context_today().replace(day=1))]"/>
+                
+                <!-- Group by filters -->
+                <group expand="1" string="Group By">
+                    <filter string="Student" name="group_by_student" context="{'group_by':'student_id'}"/>
+                    <filter string="Status" name="group_by_status" context="{'group_by':'status'}"/>
+                </group>
+
+                <!-- Custom date range filter -->
+                <filter string="Custom Date Range" name="date_range" 
+                    domain="[('date', '&gt;=', '2024-01-01'), ('date', '&lt;=', '2024-12-31')]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for Payments with added 'graph' view mode -->
+    <record model="ir.actions.act_window" id="action_payment">
+        <field name="name">Payments</field>
+        <field name="res_model">learning.center.payment</field>
+        <field name="view_mode">tree,form,graph</field> <!-- Added graph view -->
+        <field name="search_view_id" ref="view_learning_center_payment_filter"/>
+    </record>
+
+    <!-- Tree View for Payments -->
+    <record id="view_payment_tree" model="ir.ui.view">
+        <field name="name">payment.tree</field>
+        <field name="model">learning.center.payment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="student_id"/>
+                <field name="date"/>
+                <field name="amount"/>
+                <field name="status"/>
+                <field name="admin_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Graph View for Payments -->
+    <record id="view_payment_graph" model="ir.ui.view">
+        <field name="name">payment.graph</field>
+        <field name="model">learning.center.payment</field>
+        <field name="arch" type="xml">
+            <graph string="Payments Analysis" type="bar">
+                <field name="amount" type="measure"/>
+                <field name="date" interval="month" type="row"/>
+                <field name="status" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Menu item for Payments -->
+    <menuitem
+        id="menu_learning_center_payments"
+        name="Payments"
+        action="action_payment"
+        parent="menu_learning_center_root"
+    />
+</odoo>

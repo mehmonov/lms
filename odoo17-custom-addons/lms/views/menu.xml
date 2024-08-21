@@ -1,0 +1,57 @@
+<odoo>
+    <!-- Action for Student -->
+    <record model="ir.actions.act_window" id="action_student">
+        <field name="name">Students</field>
+        <field name="res_model">learning.center.student</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new student.
+            </p>
+        </field>
+    </record>
+
+    <!-- Search View for Student -->
+    <record id="view_student_search" model="ir.ui.view">
+        <field name="name">student.search</field>
+        <field name="model">learning.center.student</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="birth_date" />
+                <field name="email" />
+                <field name="phone" />
+                <field name="address" />
+                <field name="course_ids" />
+                <field name="payment_ids" />
+
+                <!-- Date filters -->
+
+                
+                <filter string="This Month" name="this_month" domain="[('register_time','&gt;=',context_today().replace(day=1)), ('register_time','&lt;=',context_today())]"/>
+                <filter string="Last Month" name="last_month" domain="[('register_time','&gt;=',(context_today().replace(day=1) - relativedelta(months=1)).replace(day=1)), ('register_time','&lt;',context_today().replace(day=1))]"/>
+                
+                <!-- Group by options -->
+                <group expand="1" string="Group By">
+                    <filter string="Course" name="group_by_course"
+                        context="{'group_by':'course_ids'}" />
+                    <filter string="Address" name="group_by_address"
+                        context="{'group_by':'address'}" />
+                </group>
+
+                <!-- Custom date range filter -->
+                <filter string="Custom Date Range" name="date_range"
+                    domain="[('register_time', '&gt;=', '2024-01-01'), ('register_time', '&lt;=', '2024-12-31')]" />
+            </search>
+        </field>
+    </record>
+
+    <!-- Menu items -->
+    <menuitem id="menu_learning_center_root" name="Learning Center" />
+
+    <menuitem id="menu_learning_center_students" name="Students" parent="menu_learning_center_root"
+        action="action_student" />
+
+    <menuitem id="menu_learning_center_others" name="Other" parent="menu_learning_center_root" />
+
+</odoo>

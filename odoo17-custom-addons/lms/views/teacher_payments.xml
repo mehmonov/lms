@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <data >
+    <record id="view_teacher_payment_tree" model="ir.ui.view">
+    <field name="name">teacher.payment.tree</field>
+    <field name="model">learning.center.teacher.payment</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="teacher_id"/>
+            <field name="date"/>
+            <field name="amount"/>
+            <field name="description"/>
+        </tree>
+        </field>
+    </record>
+    <record id="view_teacher_payment_form" model="ir.ui.view">
+        <field name="name">teacher.payment.form</field>
+        <field name="model">learning.center.teacher.payment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="teacher_id"/>
+                        <field name="date"/>
+                        <field name="amount"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_teacher_payment" model="ir.actions.act_window">
+        <field name="name">Teacher Payments</field>
+        <field name="res_model">learning.center.teacher.payment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record id="view_teacher_payment_graph" model="ir.ui.view">
+            <field name="name">teacher.payment.graph</field>
+            <field name="model">learning.center.teacher.payment</field>
+            <field name="arch" type="xml">
+                <graph string="Teacher Payments" type="bar">
+                    <field name="teacher_id" type="dimension"/>
+                    <field name="amount" type="measure"/>
+                    <field name="date" type="dimension"/>
+                    
+                   
+                </graph>
+            </field>
+        </record>
+        
+        <!-- Action for Teacher Payment Graph -->
+        <record id="action_teacher_payment_graph" model="ir.actions.act_window">
+            <field name="name">Teacher Payment Graph</field>
+            <field name="res_model">learning.center.teacher.payment</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_teacher_payment_graph"/>
+        </record>
+
+        <!-- Menu Item for Teacher Payment Graph -->
+        <menuitem
+            id="menu_teacher_payment_graph"
+            name="Teacher Payment Graph"
+            parent="menu_learning_center_others"
+            action="action_teacher_payment_graph"
+        />
+        <menuitem
+        id="menu_learning_center_teacher_payments"
+        name="Teacher Payments"
+        action="action_teacher_payment"
+        parent="menu_learning_center_others"/>
+
+  
+  </data>
+</odoo>
