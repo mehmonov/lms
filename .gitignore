@@ -10,8 +10,8 @@ requirements.txt/
 setup.py
 setup.cfg
 Makefile
-post/
-web_responsive.zip/
+odoo17-custom-addons/post/
+odoo17-custom-addons/web_responsive.zip
 # dotfiles
 .*
 !.gitignore
