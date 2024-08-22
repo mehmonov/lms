@@ -13,7 +13,7 @@ Admin rolidagi foydalanuvchilar quyidagi vazifalarni bajara olad:
 - O‘qituvchilarni ro‘yxatdan o‘tkazish.
 - O‘qituvchilarga oylik to‘lashni boshqarish.
 - O‘qituvchilarni guruhlarga qo‘shish.
-- Kurslar va guruhlar yaratish, tahrirlash va boshqarish.
+- Kurslar va guruhlar yaratish, tahrirlash va boshqarish va hokazolar
 
 ### Administrator
 
